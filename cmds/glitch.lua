@@ -1,5 +1,5 @@
-if STOMP_LOADED == true then return end
-getgenv().STOMP_LOADED = true
+if GLITCH_LOADED == true then return end
+getgenv().GLITCH_LOADED = true
 
 local player = game:service"Players".LocalPlayer
 local CurFist
@@ -68,23 +68,6 @@ function StompCmd(plr, location)
                     end
                     wait(1)
                 until target.Character:FindFirstChild("GRABBING_CONSTRAINT")
-                local x,y,z = nil,nil,nil
-                if location:lower() == 'admin' then
-                    x,y,z = lib['Admin']:split(",")[1],lib['Admin']:split(",")[2],lib['Admin']:split(",")[3]
-                elseif location:lower() == 'bank' then
-                    x,y,z = lib['Bank']:split(",")[1],lib['Bank']:split(",")[2],lib['Bank']:split(",")[3]
-                elseif location:lower() == 'club' then
-                    x,y,z = lib['Club']:split(",")[1],lib['Club']:split(",")[2],lib['Club']:split(",")[3]
-                elseif location:lower() == 'train' then
-                    x,y,z = lib['Train']:split(",")[1],lib['Train']:split(",")[2],lib['Train']:split(",")[3]
-                elseif location:lower() == 'host' then
-                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
-                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
-                else
-                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
-                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
-                end
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
                 wait(1)
                 local Animation = Instance.new("Animation",game.Players.LocalPlayer.Character)
                 Animation.AnimationId = "rbxassetid://3152378852"
