@@ -35,13 +35,8 @@ local lib = {
     Train = "600,47,-117",
 }
 
-function StompCmd(plr, location)
-    local target = FindPlr(plr)
-    if plr:lower() == 'host' then
-        target = game:service"Players":GetPlayerByUserId(Settings['host']).Name
-    end
-    if target ~= nil then
-        target = game:service"Players"[target]
+function StompCmd(plr)
+        local target = FindPlr(plr)
         if target and player and target.Character and player.Character then
             local OldPos = player.Character.HumanoidRootPart.CFrame
             player.Character.HumanoidRootPart.Anchored = false
@@ -64,37 +59,10 @@ function StompCmd(plr, location)
                     local x,y,z = target.Character.UpperTorso.Position.X,target.Character.UpperTorso.Position.Y,target.Character.UpperTorso.Position.Z
                     player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y+1.3,z)
                     if not target.Character:FindFirstChild("GRABBING_CONSTRAINT") then
-                        game:service"ReplicatedStorage".MainEvent:FireServer("Grabbing",false)
+                        game:service"ReplicatedStorage".MainEvent:FireServer("Stomp",false)
                     end
-                    wait(1)
-                until target.Character:FindFirstChild("GRABBING_CONSTRAINT")
-                local x,y,z = nil,nil,nil
-                if location:lower() == 'admin' then
-                    x,y,z = lib['Admin']:split(",")[1],lib['Admin']:split(",")[2],lib['Admin']:split(",")[3]
-                elseif location:lower() == 'bank' then
-                    x,y,z = lib['Bank']:split(",")[1],lib['Bank']:split(",")[2],lib['Bank']:split(",")[3]
-                elseif location:lower() == 'club' then
-                    x,y,z = lib['Club']:split(",")[1],lib['Club']:split(",")[2],lib['Club']:split(",")[3]
-                elseif location:lower() == 'train' then
-                    x,y,z = lib['Train']:split(",")[1],lib['Train']:split(",")[2],lib['Train']:split(",")[3]
-                elseif location:lower() == 'host' then
-                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
-                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
-                else
-                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
-                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
-                end
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
-                wait(1)
-                local Animation = Instance.new("Animation",game.Players.LocalPlayer.Character)
-                Animation.AnimationId = "rbxassetid://3152378852"
-                game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Animation):Play()
-                wait(1)
-                game.Players.LocalPlayer.Character.Humanoid.Health = 0
-                game.Players.LocalPlayer.Character:Wait()
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
-                game:service"ReplicatedStorage".MainEvent:FireServer("Grabbing",false)
-                task.wait(1)
+                    wait()
+                until target.Character:FindFirstChild("Dead") or game:GetService("Players")[v].Character:FindFirstChild("BodyEffects"):FindFirstChild("K.O").Value == false
                 player.Character.HumanoidRootPart.CFrame = OldPos
             end
         end
