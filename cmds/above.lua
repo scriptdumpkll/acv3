@@ -2,6 +2,7 @@ if ABOVE_LOADED == true then return end
 getgenv().ABOVE_LOADED = true
 
 function AboveCmd()
+     local player = game.Players.LocalPlayer
      Toggles['Noclipping'] = true
      player.Character.HumanoidRootPart.Anchored = false
      player.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame + Vector3.new(0,8,0)
