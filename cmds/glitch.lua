@@ -35,7 +35,7 @@ local lib = {
     Train = "600,47,-117",
 }
 
-function StompCmd(plr, location)
+function GlitchCmd(plr, location)
     local target = FindPlr(plr)
     if plr:lower() == 'host' then
         target = game:service"Players":GetPlayerByUserId(Settings['host']).Name
@@ -76,7 +76,6 @@ function StompCmd(plr, location)
                 game.Players.LocalPlayer.Character.Humanoid.Health = 0
                 game.Players.LocalPlayer.Character:Wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
-                game:service"ReplicatedStorage".MainEvent:FireServer("Grabbing",false)
                 task.wait(1)
                 player.Character.HumanoidRootPart.CFrame = OldPos
             end
